@@ -8,3 +8,7 @@ service = AnalisarService()
 @router.post("/analisar")
 async def analisar():
     return service.analisar()
+
+@router.options("/analisar")
+async def analisar():
+    return service.analisar()

@@ -1,0 +1,60 @@
+create table if not exists pesquisa
+(
+    id_pesquisa       int auto_increment
+        primary key,
+    texto             varchar(5000)                           not null,
+    data              date                                    not null,
+    classificacao_nps enum ('Promotor', 'Neutro', 'Detrator') not null,
+    valor_nps         int                                     not null,
+    foi_analisado     tinyint default 0                       not null
+);
+
+create table if not exists entidade
+(
+    id_entidade int auto_increment
+        primary key,
+    score       float         not null,
+    tipo        varchar(45)   not null,
+    texto       varchar(1000) not null,
+    inicio      int           not null,
+    fim         int           not null,
+    id_pesquisa int           not null,
+    constraint fk_entidade_texto1
+        foreign key (id_pesquisa) references pesquisa (id_pesquisa)
+);
+
+create index fk_entidade_texto1_idx
+    on entidade (id_pesquisa);
+
+create table if not exists palavra_chave
+(
+    id_palavra_chave int auto_increment
+        primary key,
+    score            float         not null,
+    texto            varchar(1000) not null,
+    inicio           int           not null,
+    fim              int           not null,
+    id_pesquisa      int           not null,
+    constraint fk_palavra_chave_texto1
+        foreign key (id_pesquisa) references pesquisa (id_pesquisa)
+);
+
+create index fk_palavra_chave_texto1_idx
+    on palavra_chave (id_pesquisa);
+
+create table if not exists sentimento
+(
+    id_sentimento int auto_increment
+        primary key,
+    sentimento    enum ('neutro', 'positivo', 'negativo', 'misturado') not null,
+    neutro        float                                                not null,
+    positivo      float                                                not null,
+    negativo      float                                                not null,
+    misturado     float                                                not null,
+    id_pesquisa   int                                                  not null,
+    constraint fk_sentimento_pesquisa1
+        foreign key (id_pesquisa) references pesquisa (id_pesquisa)
+);
+
+create index fk_sentimento_pesquisa1_idx
+    on sentimento (id_pesquisa);

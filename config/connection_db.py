@@ -8,10 +8,15 @@ class ConnectionDB:
 
     def conn(self):
         db = mysql.connector.connect(
-            host=os.environ.get("DB_HOST", "db-comprehend.crfvyq6er0ts.us-east-1.rds.amazonaws.com"),
-            user=os.environ.get("DB_USER" ,"root"),
-            password=os.environ.get("DB_PASS", "ttcc2022"),
-            database=os.environ.get("DB_NAME", "dbinteligencia")
+            host="localhost",
+            user="root",
+            password="root",
+            database="dbinteligencia",
         )
         cursor = db.cursor()
         return db, cursor
+
+        # host=os.environ.get("DB_HOST", "localhost"),
+        #     user=os.environ.get("DB_USER" ,"root"),
+        #     password=os.environ.get("DB_PASS", "root"),
+        #     database=os.environ.get("DB_NAME", "dbinteligencia")

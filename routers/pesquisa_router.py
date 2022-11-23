@@ -25,7 +25,7 @@ class PesquisaForm(BaseModel):
 
 
 @router.get("/pesquisa", response_model=List[Pesquisa])
-async def listar(size: int = 20, offset: int = 0, sentimento: str = None, nps: str = None, palavraChave: str = None):
+async def listar(size: int = 1000, offset: int = 0, sentimento: str = None, nps: str = None, palavraChave: str = None):
     return service.listar(size, offset, palavraChave, sentimento, nps)
 
 @router.post("/pesquisa")
