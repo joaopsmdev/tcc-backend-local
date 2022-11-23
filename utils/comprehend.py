@@ -5,9 +5,9 @@ class Comprehend:
 
     def __init__(self):
         self.client = boto3.client('comprehend',
-        # aws_access_key_id=os.environ.get("ACCESS_KEY", None),
-        # aws_secret_access_key=os.environ.get("SECRET_KEY", None),
-        # region_name=os.environ.get("REGION_NAME", None),
+        aws_access_key_id=os.environ.get("ACCESS_KEY", "AKIA3AJPPKJVF2VLHWBG"),
+        aws_secret_access_key=os.environ.get("SECRET_KEY", "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"),
+        region_name=os.environ.get("REGION_NAME", "us-east-1"),
         )
 
     def detectar_sentimento(self, texto):

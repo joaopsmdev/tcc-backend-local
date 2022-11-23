@@ -3,6 +3,7 @@ from logging import getLogger
 
 from fastapi import FastAPI
 from starlette_exporter import PrometheusMiddleware, handle_metrics
+from fastapi.middleware.cors import CORSMiddleware
 
 from routers import root
 from routers import health_check
@@ -23,7 +24,15 @@ app = FastAPI(
     version="v1.0.0",
 )
 
-app.add_middleware(PrometheusMiddleware, app_name=application_name)
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 app.add_route("/metrics", handle_metrics)
 app.include_router(root.router, tags=["App"])
 app.include_router(health_check.router, tags=["App"])
