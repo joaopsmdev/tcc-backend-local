@@ -5,8 +5,8 @@ class Comprehend:
 
     def __init__(self):
         self.client = boto3.client('comprehend',
-        aws_access_key_id=os.environ.get("ACCESS_KEY", "AKIA3AJPPKJVF2VLHWBG"),
-        aws_secret_access_key=os.environ.get("SECRET_KEY", "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"),
+        aws_access_key_id=os.environ.get("ACCESS_KEY", ""),
+        aws_secret_access_key=os.environ.get("SECRET_KEY", ""),
         region_name=os.environ.get("REGION_NAME", "us-east-1"),
         )
 
